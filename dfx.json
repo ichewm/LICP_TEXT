@@ -1,0 +1,29 @@
+{
+  "canisters": {
+    "LICP_backend": {
+      "candid": "src/LICP_backend/LICP_backend.did",
+      "package": "LICP_backend",
+      "type": "rust"
+    },
+    "LICP_frontend": {
+      "dependencies": [
+        "LICP_backend"
+      ],
+      "frontend": {
+        "entrypoint": "src/LICP_frontend/src/index.html"
+      },
+      "source": [
+        "src/LICP_frontend/assets",
+        "dist/LICP_frontend/"
+      ],
+      "type": "assets"
+    }
+  },
+  "defaults": {
+    "build": {
+      "args": "",
+      "packtool": ""
+    }
+  },
+  "version": 1
+}
