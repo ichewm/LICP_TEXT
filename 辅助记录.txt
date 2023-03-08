@@ -1,0 +1,14 @@
+LICP_backend: http://127.0.0.1:4943/?canisterId=renrk-eyaaa-aaaaa-aaada-cai&id=rno2w-sqaaa-aaaaa-aaacq-cai
+icrc1-ledger: http://127.0.0.1:4943/?canisterId=renrk-eyaaa-aaaaa-aaada-cai&id=rdmx6-jaaaa-aaaaa-aaadq-cai
+ledger: http://127.0.0.1:4943/?canisterId=renrk-eyaaa-aaaaa-aaada-cai&id=qoctq-giaaa-aaaaa-aaaea-cai
+
+
+
+7699a2b458a726b304677ef278192bf01c31f3c59daf0dfac746fbe79a96e182
+
+
+dfx canister call ledger transfer '(record { to = '$(python3 -c 'print("vec{" + ":nat8;".join([str(b) for b in bytes.fromhex("7699a2b458a726b304677ef278192bf01c31f3c59daf0dfac746fbe79a96e182")]) + ":nat8}")')'; fee = record {e8s=0:nat64}; memo=2:nat64; amount=record {e8s=1000000:nat64}; })'
+
+
+dfx canister call ledger account_balance '(record { account = '$(python3 -c 'print("vec{" + ":nat8;".join([str(b) for b in bytes.fromhex("7699a2b458a726b304677ef278192bf01c31f3c59daf0dfac746fbe79a96e182")]) + ":nat8}")')' })'
+dfx canister call ledger account_balance '(record { account = '$(python3 -c 'print("vec{" + ":nat8;".join([str(b) for b in bytes.fromhex("063fddde9406d9e2a25bf98a55e141cdd50fbdea4ae0e57caa6d00d6b5ec4c35")]) + ":nat8}")')' })'

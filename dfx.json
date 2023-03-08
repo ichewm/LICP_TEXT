@@ -22,12 +22,20 @@
       "type": "custom",
       "wasm": "src/LICPICRC1/ic-icrc1-ledger.wasm",
       "candid": "src/LICPICRC1/icrc1.did"
+    },
+    "ledger": {
+      "type": "custom",
+      "wasm": "src/ICP_Ledger/ledger.wasm",
+      "candid": "src/ICP_Ledger/ledger.private.did"
     }
   },
   "defaults": {
     "build": {
       "args": "",
       "packtool": ""
+    },
+    "replica": {
+      "subnet_type": "system"
     }
   },
   "version": 1

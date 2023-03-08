@@ -2,6 +2,23 @@ type CanisterName = variant {
     Licpicrc1Canister;
     ICPCanister;
 };
+type BlockIndex = nat64;
+type Tokens = record {
+     e8s : nat64;
+};
+
+type TransferError = variant {
+    BadFee : record { expected_fee : Tokens; };
+    InsufficientFunds : record { balance: Tokens; };
+    TxTooOld : record { allowed_window_nanos: nat64 };
+    TxCreatedInFuture : null;
+    TxDuplicate : record { duplicate_of: BlockIndex; }
+};
+
+type TransferResult = variant {
+    Ok : BlockIndex;
+    Err : TransferError;
+};
 
 
 
@@ -11,4 +28,7 @@ service : {
     "minting_target_tokens": () -> ();
     "query_account_principal": () -> (principal);
     "query_canister_id": () -> (principal);
+    "select_canister_account_id": () -> (text);
+    "icp_balance": (principal) -> (nat64);
+    "transfer_tototo": (principal, text, nat64) -> (TransferResult);
 }
