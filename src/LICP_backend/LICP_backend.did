@@ -1,3 +1,14 @@
+type CanisterName = variant {
+    Licpicrc1Canister;
+    ICPCanister;
+};
+
+
+
 service : {
-    "greet": (text) -> (text) query;
+    "query_canister": (text) -> (principal) query;
+    "set_canister": (text, principal) -> ();
+    "minting_target_tokens": () -> ();
+    "query_account_principal": () -> (principal);
+    "query_canister_id": () -> (principal);
 }

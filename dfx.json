@@ -17,6 +17,11 @@
         "dist/LICP_frontend/"
       ],
       "type": "assets"
+    },
+    "icrc1-ledger": {
+      "type": "custom",
+      "wasm": "src/LICPICRC1/ic-icrc1-ledger.wasm",
+      "candid": "src/LICPICRC1/icrc1.did"
     }
   },
   "defaults": {

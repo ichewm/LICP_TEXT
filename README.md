@@ -1,37 +1,22 @@
 # LICP
 
-Welcome to your new LICP project and to the internet computer development community. By default, creating a new project adds this README and some template files to your project directory. You can edit these template files to customize your project and to include your own code to speed up the development cycle.
-
-To get started, you might want to explore the project directory structure and the default configuration file. Working with this project in your development environment will not affect any production deployment or identity tokens.
-
-To learn more before you start working with LICP, see the following documentation available online:
-
-- [Quick Start](https://smartcontracts.org/docs/quickstart/quickstart-intro.html)
-- [SDK Developer Tools](https://smartcontracts.org/docs/developers-guide/sdk-guide.html)
-- [Rust Canister Devlopment Guide](https://smartcontracts.org/docs/rust-guide/rust-intro.html)
-- [ic-cdk](https://docs.rs/ic-cdk)
-- [ic-cdk-macros](https://docs.rs/ic-cdk-macros)
-- [Candid Introduction](https://smartcontracts.org/docs/candid-guide/candid-intro.html)
-- [JavaScript API Reference](https://erxue-5aaaa-aaaab-qaagq-cai.raw.ic0.app)
-
-If you want to start working on your project right away, you might want to try the following commands:
+## 部署方式
 
 ```bash
-cd LICP/
-dfx help
-dfx canister --help
-```
+# 启动 本地容器执行环境
+dfx start --clean
 
-## Running the project locally
+# 部署 LICP_backend 容器
+dfx deploy LICP_backend
 
-If you want to test your project locally, you can use the following commands:
+# 设置变量
+# 铸造角色为 LICP 后端
+export MINTROLE="LICP 后端"
+# 控制器为当前身份主体
+export PRINCIPAL=$(dfx identity get-principal)
 
-```bash
-# Starts the replica, running in the background
-dfx start --background
-
-# Deploys your canisters to the replica and generates your candid interface
-dfx deploy
+# 部署 LICP代币 容器
+dfx deploy icrc1-ledger --argument "(record {  token_symbol = \"LICP\";  token_name = \"Stake ICP\";  minting_account = record { owner = principal \"$MINTROLE\"  };  transfer_fee = 0;  metadata = vec {};  initial_balances = vec {};  archive_options = record {    num_blocks_to_archive = 2000;    trigger_threshold = 1000;    controller_id = principal \"$PRINCIPAL\";  };},)"
 ```
 
 Once the job completes, your application will be available at `http://localhost:4943?canisterId={asset_canister_id}`.
