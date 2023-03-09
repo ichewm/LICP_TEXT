@@ -126,6 +126,12 @@ pub async fn minting_target_tokens() {
 
 }
 
+// 使用 tecdsa 生成一个 用于管理 icp 的 罐
+
+// 控制 管理icp 的罐 发起交易
+
+// 展示这个罐的id
+
 
 // 关于 tecdsa 测试
 
@@ -146,6 +152,25 @@ async fn public_key() -> Result<PublicKeyReply, String> {
         public_key_hex: hex::encode(&res.public_key),
     })
 }
+
+// public key to Principal
+#[update]
+pub async fn public_key_to_principal() -> Principal {
+    let request = ECDSAPublicKey {
+        canister_id: None,
+        derivation_path: vec![],
+        key_id: EcdsaKeyIds::TestKeyLocalDevelopment.to_key_id(),
+    };
+
+    let (res,): (ECDSAPublicKeyReply,) =
+        ic_cdk::call(mgmt_canister_id(), "ecdsa_public_key", (request,))
+            .await
+            .map_err(|e| format!("ecdsa_public_key failed {}", e.1)).expect("server error");
+    
+    Principal::self_authenticating(res.public_key)
+}
+
+
 
 #[update]
 async fn sign(message: String) -> Result<SignatureReply, String> {
