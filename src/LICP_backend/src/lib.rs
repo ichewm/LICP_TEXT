@@ -44,19 +44,21 @@ pub async fn transfer_tototo(_from:Principal, _to:String, value: u64) -> Result<
     let to_account = AccountIdentifier::try_from(bytes).unwrap();
     let canister_id = ic_cdk::api::id();
 
-    let from_account_identifier = AccountIdentifier::new(
-        &canister_id,
-        &Subaccount::from(_from)
-    );
-    let from_account_identifier_string = from_account_identifier.to_string();
-    let mut from_account:[u8; 32] = [0; 32];
-    from_account.copy_from_slice(&hex::decode(from_account_identifier_string).unwrap(),);
-    let from_subaccount = Subaccount(from_account);
+    // let from_account_identifier = AccountIdentifier::new(
+    //     &canister_id,
+    //     &Subaccount::from(_from)
+    // );
+    // let from_subaccount = Subaccount(from_account_identifier.as_ref());
+    // let from_account_identifier_string = from_account_identifier.to_string();
+    // let mut from_account:[u8; 32] = [0; 32];
+    // from_account.copy_from_slice(&hex::decode(from_account_identifier_string).unwrap(),);
+    // let from_subaccount = Subaccount(from_account);
+
     let transfer_args = TransferArgs {
             memo: Memo(0),
             amount: Tokens::from_e8s(value) - DEFAULT_FEE,
             fee: DEFAULT_FEE,
-            from_subaccount: Some(from_subaccount),
+            from_subaccount: Some(Subaccount::from(_from)),
             to: to_account,
             created_at_time: None,
         };
